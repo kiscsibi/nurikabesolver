@@ -5,6 +5,8 @@ public class NurikabeEngine {
     private int width;
     
     private int color;
+    private int bla;
+    
     
     public NurikabeEngine(int height, int width) {
 	super();
