@@ -48,6 +48,7 @@ public class Mainwindow extends javax.swing.JFrame {
 	private JButton jButtonStart;
 	
 	private NurikabeEngine Engine;
+
 	
 	/**
 	 *  Internal class representing the playfield 

@@ -1,35 +1,27 @@
 
 public class NurikabeEngine {
 
-    private int height;
-    private int width;
-    
-    private int color;
-    private int bla;
-    
+	TBoard Board;
     
     public NurikabeEngine(int height, int width) {
-	super();
-	this.height = height;
-	this.width = width;
-	
-	color = 0;
+    	super();
+    	Board = new TBoard(height, width);
     }
 
     public int getHeight() {
-        return height;
+        return Board.getHeight();
     }
 
     public void setHeight(int height) {
-        this.height = height;
+        Board.setHeight(height);
     }
 
     public int getWidth() {
-        return width;
+        return Board.getWidth();
     }
 
     public void setWidth(int width) {
-        this.width = width;
+        Board.setWidth(width);
     }
     
     /**
@@ -40,11 +32,7 @@ public class NurikabeEngine {
      */    
     //TODO throw out of bounds exception
      public int getColor(int x, int y) {
-	if(color == 2)
-	    color = 0;
-	else
-	    color++;
-	return color;
-    }
+    	 return Board.getColor(x, y);
+     }
     
 }
