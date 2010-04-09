@@ -39,20 +39,23 @@ public class TBoard {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-        //TODO by reshaping height/width, the whole board changes
-    }
-
     public int getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    
     public int getColor(int x,int y) {
     	return All[x][y].getColor();
+    }
+    
+    public void loadLevel(TLevelStruct level) throws Exception {
+	//TODO check exception
+	width = level.width;
+	height = level.height;
+	init();
+	
+	while(!level.isEmpty()) {
+	    Walls.add(new TWall(All[level.getX()][level.getY()], level.getSize()));
+	    level.remove();
+	}
     }
 }

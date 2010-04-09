@@ -12,34 +12,25 @@ public class TCell {
 	TCell left;
 	TCell right;
 	
-	public int amountFreeNeighbours() {
-		int a = 0;
-		
-		if(up.hasColor())
-			a++;
-		if(down.hasColor())
-			a++;
-		if(left.hasColor())
-			a++;
-		if(right.hasColor())
-			a++;
-		
-		return a;
+	
+	public TCell(int x, int y) {
+		super();
+		Position = new TPos(x,y);
+		up = null;
+		down = null;
+		left = null;
+		right = null;
+		color = 2;
+		Owner = null;
 	}
-	
-	
 	
 	public TCell getUp() {
 		return up;
 	}
 
-
-
 	public void setUp(TCell up) {
 		this.up = up;
 	}
-
-
 
 	public TCell getDown() {
 		return down;
@@ -57,36 +48,12 @@ public class TCell {
 		this.left = left;
 	}
 
-
-
 	public TCell getRight() {
 		return right;
 	}
 
-
-
 	public void setRight(TCell right) {
 		this.right = right;
-	}
-
-
-
-	public TCell(int x, int y) {
-		super();
-		Position = new TPos(x,y);
-		up = null;
-		down = null;
-		left = null;
-		right = null;
-		color = 2;
-	}
-
-	public void setBlack() {
-		color = 0;
-	}
-	
-	public void setWhite() {
-		color = 1;
 	}
 	
 	public int getColor() {
@@ -96,13 +63,36 @@ public class TCell {
 	public void setColor(int color) {
 		this.color = color;
 	}
-
+	
+	public void setBlack() {
+		color = 0;
+	}
+	
+	public void setWhite() {
+		color = 1;
+	}
+	
 	public boolean hasColor() {
 		if (color != 2)
 		return true;
 		else return false;
 	}
 
+	public int amountFreeNeighbours() {
+		int a = 0;
+		
+		if(up.hasColor())
+			a++;
+		if(down.hasColor())
+			a++;
+		if(left.hasColor())
+			a++;
+		if(right.hasColor())
+			a++;
+		
+		return a;
+	}
+	
 	public TPos[] getPossibilities() {
 		//TODO implement
 		TPos[] pos = null;

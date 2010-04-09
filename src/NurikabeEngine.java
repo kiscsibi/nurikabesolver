@@ -12,16 +12,8 @@ public class NurikabeEngine {
         return Board.getHeight();
     }
 
-    public void setHeight(int height) {
-        Board.setHeight(height);
-    }
-
     public int getWidth() {
         return Board.getWidth();
-    }
-
-    public void setWidth(int width) {
-        Board.setWidth(width);
     }
     
     /**

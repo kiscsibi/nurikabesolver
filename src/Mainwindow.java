@@ -60,24 +60,23 @@ public class Mainwindow extends javax.swing.JFrame {
 	    }
 	    public void paint(Graphics graphics)
 	    {
+
+		    int width = this.getWidth()/Engine.getWidth();
+		    int height = this.getHeight()/Engine.getHeight();
+
 		
 		//draw the fields according to their value	    
 		for(int w = 0; w < Engine.getWidth(); w++) {
 			for(int h = 0; h < Engine.getHeight(); h++) {
 			    
-			    
-			    int width = this.getWidth()/Engine.getWidth();
-			    int height = this.getHeight()/Engine.getHeight();
-			    
-			    int color = Engine.getColor(w,h);
-			    switch (color) {
-			    case 0:
+			    switch (Engine.getColor(w,h)) {
+			    case 2:
 				graphics.setColor(Color.gray);
 				break;
-			    case 1:
+			    case 0:
 				graphics.setColor(Color.black);
 				break;
-			    case 2:
+			    case 1:
 				graphics.setColor(Color.white);
 				break;
 			    }
@@ -85,6 +84,17 @@ public class Mainwindow extends javax.swing.JFrame {
 			    graphics.fillRect(w*width, h*height, width, height);
 			}	
 		}
+		
+		//draw the raster
+		graphics.setColor(Color.black);
+		for(int w = 1; w < Engine.getWidth(); w++) {
+		    graphics.drawLine(w*width, 1, w*width, this.getHeight());
+		}
+		for(int h = 1; h < Engine.getHeight(); h++) {
+		    graphics.drawLine(1, h*height, this.getWidth(), h*height);
+		}		
+		graphics.drawRect(0, 0, this.getWidth()-1, this.getHeight()-1);
+
 	    }
 	}
 	
