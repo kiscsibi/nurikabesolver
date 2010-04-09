@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.Queue;
 
 
@@ -33,6 +34,9 @@ public class TBoard {
     				All[i][j].setRight(All[i][j+1]);
     		}
     	}
+    	Walls = new LinkedList<TWall>();
+    	Floor = new LinkedList<TFloor>();
+    	Grey = new LinkedList<TCell>();
     }
     
     public int getHeight() {
@@ -56,6 +60,7 @@ public class TBoard {
 	while(!level.isEmpty()) {
 	    Walls.add(new TWall(All[level.getX()][level.getY()], level.getSize()));
 	    level.remove();
+	    
 	}
     }
 }

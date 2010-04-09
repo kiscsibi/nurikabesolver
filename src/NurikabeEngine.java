@@ -1,11 +1,15 @@
+import java.io.File;
+
 
 public class NurikabeEngine {
 
 	TBoard Board;
+	TFileHandler FileHandler;
     
     public NurikabeEngine(int height, int width) {
     	super();
     	Board = new TBoard(height, width);
+    	FileHandler = new TFileHandler();
     }
 
     public int getHeight() {
@@ -26,5 +30,9 @@ public class NurikabeEngine {
      public int getColor(int x, int y) {
     	 return Board.getColor(x, y);
      }
+
+    public void newBoard(File file) throws Exception {
+	Board.loadLevel(FileHandler.readLevel(file));
+    }
     
 }

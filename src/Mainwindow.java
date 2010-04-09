@@ -3,12 +3,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.io.File;
+
 import javax.swing.AbstractAction;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
+import javax.swing.JFileChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -33,6 +36,9 @@ import javax.swing.SwingUtilities;
 */
 public class Mainwindow extends javax.swing.JFrame {
 	private JButton jButtonClose;
+	private JFileChooser jFileChooser;
+	private AbstractAction abstractActionFileOpen;
+	private JMenuItem jMenuItemFile;
 	private AbstractAction abstractActionClose;
 	private Canvas canvas1;
 	private AbstractAction closeAboutAction;
@@ -133,6 +139,7 @@ public class Mainwindow extends javax.swing.JFrame {
 				jMenuFile = new JMenu();
 				jMenuBar.add(jMenuFile);
 				jMenuFile.setText("File");
+				jMenuFile.add(getJMenuItemFile());
 			    }
 			    {
 				jMenuHelp = new JMenu();
@@ -278,5 +285,51 @@ public class Mainwindow extends javax.swing.JFrame {
 
 	private Mainwindow getMainwindow() {
 	    return this;
-	}	
+	}
+	
+	private JMenuItem getJMenuItemFile() {
+	    if(jMenuItemFile == null) {
+		jMenuItemFile = new JMenuItem();
+		jMenuItemFile.setText("File");
+		jMenuItemFile.setAction(getAbstractActionFileOpen());
+	    }
+	    return jMenuItemFile;
+	}
+	
+	private AbstractAction getAbstractActionFileOpen() {
+	    if(abstractActionFileOpen == null) {
+		abstractActionFileOpen = new AbstractAction("Open", null) {
+		    public void actionPerformed(ActionEvent evt) {
+			    //Handle open button action.
+			    if (evt.getSource() == getJMenuItemFile()) {
+				File dir = new File(System.getProperty("user.dir"));
+				getJFileChooser().setCurrentDirectory(dir);
+			        int returnVal = getJFileChooser().showOpenDialog(getMainwindow());
+
+			        if (returnVal == JFileChooser.APPROVE_OPTION) {
+			            File file =  getJFileChooser().getSelectedFile();
+				        try {
+					    Engine.newBoard(file);
+					} catch (Exception e) {
+					    // TODO generate warning, not crash
+					}
+
+			            //This is where a real application would open the file.
+			            //log.append("Opening: " + file.getName() + "." + newline);
+			        } //else {
+			          //  log.append("Open command canceled by user." + newline);
+			        //}
+			   }
+		    }
+		};
+	    }
+	    return abstractActionFileOpen;
+	}
+	
+	private JFileChooser getJFileChooser() {
+	    if(jFileChooser == null) {
+		jFileChooser = new JFileChooser();
+	    }
+	    return jFileChooser;
+	}
 }
