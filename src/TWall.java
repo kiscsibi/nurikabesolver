@@ -9,4 +9,10 @@ public class TWall extends TStructure {
 	    Size = size;
     }
 
+	@Override
+	public void colorize(TCell c) {
+	    c.setColor(1);
+	    
+	}
+
 }

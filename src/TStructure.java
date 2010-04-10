@@ -31,8 +31,11 @@ public abstract class TStructure {
 	 
 	 public void addCell(TCell c) {
 	     c.Owner = this;
+	     colorize(c);
 	     Cells.add(c);
 	 }
+	 
+	 abstract public void colorize(TCell c);
 	 
 	 public TStructure() {
 	     Cells = new LinkedList<TCell>();

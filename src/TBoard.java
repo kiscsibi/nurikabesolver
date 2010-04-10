@@ -7,6 +7,8 @@ public class TBoard {
 	int height;
 	int width;
 	
+	
+	//TODO think about Errors from All OuOFBounds
     private TCell[][] All;
     private Queue<TWall> Walls;
     private Queue<TFloor> Floor;
@@ -52,15 +54,15 @@ public class TBoard {
     }
     
     public void loadLevel(TLevelStruct level) throws Exception {
-	//TODO check exception
+	//TODO check exception for array and remove
 	width = level.width;
 	height = level.height;
 	init();
 	
 	while(!level.isEmpty()) {
-	    Walls.add(new TWall(All[level.getX()][level.getY()], level.getSize()));
+	    Walls.add(new TWall(All[level.getX()-1][level.getY()-1], level.getSize()));
 	    level.remove();
-	    
 	}
+	
     }
 }
