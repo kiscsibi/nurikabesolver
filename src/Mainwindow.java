@@ -52,7 +52,6 @@ public class Mainwindow extends javax.swing.JFrame {
 	private JMenuBar jMenuBar;
 	private CanvasPlayfield Playfield;
 	private JButton jButtonStart;
-	
 	private NurikabeEngine Engine;
 
 	
@@ -138,6 +137,9 @@ public class Mainwindow extends javax.swing.JFrame {
 		    GroupLayout thisLayout = new GroupLayout((JComponent)getContentPane());
 		    getContentPane().setLayout(thisLayout);
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+			this.setTitle("Nurikabe Solver");
+			this.setJMenuBar(jMenuBar);
+			this.setResizable(false);
 			{
 			    jMenuBar = new JMenuBar();
 			    setJMenuBar(jMenuBar);
@@ -321,7 +323,6 @@ public class Mainwindow extends javax.swing.JFrame {
 					    // TODO generate warning, not crash
 					}
 
-					
 			            //This is where a real application would open the file.
 			            //log.append("Opening: " + file.getName() + "." + newline);
 			        } //else {
