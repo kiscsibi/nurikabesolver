@@ -72,6 +72,13 @@ public class TCell {
 		color = 1;
 	}
 	
+	public int getLimit() {
+	    if(Owner == null)
+		return -1;
+	    else return Owner.getLimit();
+	    
+	}
+	
 	public boolean hasColor() {
 		if (color != 2)
 		return true;
