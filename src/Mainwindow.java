@@ -87,7 +87,6 @@ public class Mainwindow extends javax.swing.JFrame {
 			    }
 			    
 			    graphics.fillRect(w*width, h*height, width, height);
-			    int n = 0;
 			    graphics.setColor(Color.black);
 			    if( Engine.hasLimit(w,h) ) {
 				graphics.drawString(Integer.toString(Engine.getLimit(w,h)), (int)(w*width+0.25*width), (int)(h*height+0.25*height));

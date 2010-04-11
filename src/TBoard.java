@@ -7,7 +7,6 @@ public class TBoard {
 	int height;
 	int width;
 	
-	
 	//TODO think about Errors from All OuOFBounds
     private TCell[][] All;
     private Queue<TWall> Walls;
@@ -82,6 +81,33 @@ public class TBoard {
 	}
 	
 	return false;
-
     }
+    
+    public void checkNotReachable() {
+	//TODO we could save the max and min x and y values which are 
+	//reachable to not have to iterate through all the cells to check
+	
+	int greys = Grey.size();
+	int walls = Walls.size();
+	
+	for(int j = 0; j < greys; j++) {
+	    for(int i = 0; i < walls; i++) {
+	    	Walls.poll();
+	    }
+	}
+    }
+    
+    public void checkFullWalls() {
+	
+	int walls = Walls.size();
+	
+	for(int i = 0; i < walls; i++) {
+	    	TWall w = Walls.poll();
+	    	if(w.isFull()) {
+	    	    
+	    	}
+	    }
+    }
+
+    
 }

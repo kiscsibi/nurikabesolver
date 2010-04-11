@@ -43,4 +43,8 @@ public class NurikabeEngine {
 	return Board.hasLimit(w,h);
     }
     
+    public void solve() {
+	
+    }
+    
 }
