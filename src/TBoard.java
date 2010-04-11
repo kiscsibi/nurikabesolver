@@ -65,4 +65,23 @@ public class TBoard {
 	}
 	
     }
+
+    public int getLimit(int w, int h) {
+	//TODO what to do with the outofboundsexception?
+	    int n = All[w][h].getLimit();
+	return n;
+    }
+
+    public boolean hasLimit(int w, int h) {
+	//TODO this is not nice at all, change code
+	try {
+	if (All[w][h].Owner != null) {
+	    return true;
+	}
+	} catch (Exception e) {
+	}
+	
+	return false;
+
+    }
 }

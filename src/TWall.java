@@ -1,12 +1,9 @@
 
 public class TWall extends TStructure {
-
-	int Size;
     
-	public TWall(TCell cell, int size) {
-	    super();
+	public TWall(TCell cell, int Limit) {
+	    super(Limit);
 	    addCell(cell);
-	    Size = size;
     }
 
 	@Override

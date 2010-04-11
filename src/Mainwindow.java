@@ -88,6 +88,11 @@ public class Mainwindow extends javax.swing.JFrame {
 			    }
 			    
 			    graphics.fillRect(w*width, h*height, width, height);
+			    int n = 0;
+			    graphics.setColor(Color.black);
+			    if( Engine.hasLimit(w,h) ) {
+				graphics.drawString(Integer.toString(Engine.getLimit(w,h)), (int)(w*width+0.25*width), (int)(h*height+0.25*height));
+			    }
 			}	
 		}
 		
@@ -101,6 +106,7 @@ public class Mainwindow extends javax.swing.JFrame {
 		}		
 		graphics.drawRect(0, 0, this.getWidth()-1, this.getHeight()-1);
 
+		
 	    }
 	}
 	
@@ -310,10 +316,12 @@ public class Mainwindow extends javax.swing.JFrame {
 			            File file =  getJFileChooser().getSelectedFile();
 				        try {
 					    Engine.newBoard(file);
-					} catch (Exception e) {
+					    getPlayfield().repaint();
+				        } catch (Exception e) {
 					    // TODO generate warning, not crash
 					}
 
+					
 			            //This is where a real application would open the file.
 			            //log.append("Opening: " + file.getName() + "." + newline);
 			        } //else {

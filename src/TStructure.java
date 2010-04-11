@@ -3,8 +3,9 @@ import java.util.Queue;
 
 
 public abstract class TStructure {
-	Queue<TCell> Cells;
 	
+    Queue<TCell> Cells;
+    int Limit;
 	
 	//TODO is it intelligent to first iterate though everything 
 	//and then iterate through the output once more?
@@ -28,16 +29,27 @@ public abstract class TStructure {
 //		 }
 //		 return c;
 //	 }
-	 
+	    
+	    
 	 public void addCell(TCell c) {
 	     c.Owner = this;
 	     colorize(c);
 	     Cells.add(c);
+	     Limit++;
 	 }
 	 
 	 abstract public void colorize(TCell c);
 	 
-	 public TStructure() {
-	     Cells = new LinkedList<TCell>();
+	 public TStructure(int limit) {
+	    Cells = new LinkedList<TCell>();
+	    Limit = limit;
 	 }
+
+	public int getLimit() {
+	    return Limit;
+	}
+
+	public void setLimit(int limit) {
+	    Limit = limit;
+	}
 }
