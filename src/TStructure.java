@@ -37,4 +37,6 @@ public abstract class TStructure {
 	 public TStructure() {
 	     Cells = new LinkedList<TCell>();
 	 }
+	 
+
 }
