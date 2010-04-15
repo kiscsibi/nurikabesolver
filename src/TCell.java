@@ -1,3 +1,4 @@
+import java.util.Set;
 
 public class TCell {
 	int color;
@@ -85,6 +86,7 @@ public class TCell {
 		else return false;
 	}
 
+	// TODO Can be removed? Not useable for posExt() because neighbors can overlap
 	public int amountFreeNeighbours() {
 		int a = 0;
 		
@@ -100,10 +102,23 @@ public class TCell {
 		return a;
 	}
 	
-	public TPos[] getPossibilities() {
-		//TODO implement
-		TPos[] pos = null;
+	public Set<TPos> getPosExtensions() {
+		Set<TPos> pos = new Set<TPos>();
+		if(! up.hasColor())
+			pos.add(up.Position);
+		if(! down.hasColor())
+			pos.add(down.Position);
+		if(! left.hasColor())
+			pos.add(left.Position);
+		if (! right.hasColor())
+			pos.add(right.Position);
 		return pos;
 	}
-
+	
+	public boolean hasLimit(int w, int h) {
+		if (Owner != null) {
+		    return true;
+		}
+		else return false;
+	} 
 }
