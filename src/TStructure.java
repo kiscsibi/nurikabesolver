@@ -44,19 +44,12 @@ public abstract class TStructure {
 	    Cells = new LinkedList<TCell>();
 	    Limit = limit;
 	 }
-<<<<<<< local
-	 
-=======
->>>>>>> other
 
-<<<<<<< local
-=======
-	public int getLimit() {
+	 public int getLimit() {
 	    return Limit;
 	}
 
 	public void setLimit(int limit) {
 	    Limit = limit;
 	}
->>>>>>> other
 }

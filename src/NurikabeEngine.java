@@ -31,12 +31,8 @@ public class NurikabeEngine {
      }
 
     public void newBoard(File file) throws Exception {
-<<<<<<< local
     	Board.loadLevel(FileHandler.readLevel(file));
     }    
-=======
-	Board.loadLevel(FileHandler.readLevel(file));
-    }
 
     public int getLimit(int w, int h) {
 	return Board.getLimit(w,h);
@@ -49,6 +45,4 @@ public class NurikabeEngine {
     public void solve() {
 	
     }
-    
->>>>>>> other
 }
