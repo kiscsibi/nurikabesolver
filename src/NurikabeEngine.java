@@ -1,6 +1,5 @@
 import java.io.File;
 
-
 public class NurikabeEngine {
 
 	TBoard Board;
@@ -32,6 +31,10 @@ public class NurikabeEngine {
      }
 
     public void newBoard(File file) throws Exception {
+<<<<<<< local
+    	Board.loadLevel(FileHandler.readLevel(file));
+    }    
+=======
 	Board.loadLevel(FileHandler.readLevel(file));
     }
 
@@ -47,4 +50,5 @@ public class NurikabeEngine {
 	
     }
     
+>>>>>>> other
 }

@@ -44,7 +44,13 @@ public abstract class TStructure {
 	    Cells = new LinkedList<TCell>();
 	    Limit = limit;
 	 }
+<<<<<<< local
+	 
+=======
+>>>>>>> other
 
+<<<<<<< local
+=======
 	public int getLimit() {
 	    return Limit;
 	}
@@ -52,4 +58,5 @@ public abstract class TStructure {
 	public void setLimit(int limit) {
 	    Limit = limit;
 	}
+>>>>>>> other
 }
