@@ -53,15 +53,15 @@ public class TBoard {
     }
     
     public void loadLevel(TLevelStruct level) throws Exception {
-	//TODO check exception for array and remove
-	width = level.width;
-	height = level.height;
-	init();
-	
-	while(!level.isEmpty()) {
-	    Walls.add(new TWall(All[level.getX()-1][level.getY()-1], level.getSize()));
-	    level.remove();
-	}
+		//TODO check exception for array and remove
+		width = level.width;
+		height = level.height;
+		init();
+		
+		while(!level.isEmpty()) {
+		    Walls.add(new TWall(All[level.getX()-1][level.getY()-1], level.getSize()));
+		    level.remove();
+		}
 	
     }
 
@@ -71,43 +71,39 @@ public class TBoard {
 	return n;
     }
 
-    public boolean hasLimit(int w, int h) {
-	//TODO this is not nice at all, change code
-	try {
-	if (All[w][h].Owner != null) {
-	    return true;
-	}
-	} catch (Exception e) {
-	}
+    
 	
 	return false;
     }
     
-    public void checkNotReachable() {
-	//TODO we could save the max and min x and y values which are 
-	//reachable to not have to iterate through all the cells to check
-	
-	int greys = Grey.size();
-	int walls = Walls.size();
-	
-	for(int j = 0; j < greys; j++) {
-	    for(int i = 0; i < walls; i++) {
-	    	Walls.poll();
-	    }
-	}
+	// TODO move to TWall
+    public void checkReachable() {
+		//TODO we could save the max and min x and y values which are 
+		//reachable to not have to iterate through all the cells to check
+    	
+		int greys = Grey.size();
+		int walls = Walls.size();
+		
+		for(int j = 0; j < greys; j++) {
+		    for(int i = 0; i < walls; i++) {
+		    	Walls.poll();
+		    }
+		}
     }
     
     public void checkFullWalls() {
+    	int walls = Walls.size();
 	
-	int walls = Walls.size();
-	
-	for(int i = 0; i < walls; i++) {
+		for(int i = 0; i < walls; i++) {
 	    	TWall w = Walls.poll();
 	    	if(w.isFull()) {
 	    	    
 	    	}
 	    }
     }
+    
+
+
 
     
 }
