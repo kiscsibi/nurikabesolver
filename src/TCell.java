@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Set;
 
 public class TCell {
@@ -103,7 +104,7 @@ public class TCell {
 	}
 	
 	public Set<TPos> getPosExtensions() {
-		Set<TPos> pos = new Set<TPos>();
+		Set<TPos> pos = new HashSet<TPos>();
 		if(! up.hasColor())
 			pos.add(up.Position);
 		if(! down.hasColor())
@@ -121,4 +122,22 @@ public class TCell {
 		}
 		else return false;
 	} 
+	
+	public boolean isBlack() {
+		if(color == 0)
+			return true;
+		else return false;
+	}
+	
+	public boolean isWhite() {
+		if(color == 1)
+			return true;
+		else return false;
+	}
+	
+	public boolean isGray() {
+		if(color == 2)
+			return true;
+		else return false;
+	}
 }
