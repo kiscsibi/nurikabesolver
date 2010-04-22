@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
@@ -32,12 +33,12 @@ public abstract class TStructure {
 	  
 	public Set<TPos> getPosExtensions(TStructure struct) {
 		TCell c;
-		Set<TPos> posarr;
+		Set<TPos> posarr = new HashSet<TPos>();
 		
 		for(int j = 0; j  < getSize(); j++) {
-			c = Cells.pop();
-			posarr.addAll(c.getPosExt());
-			Cells.push(c);
+			c = Cells.poll();
+			posarr.addAll(c.getPosExtensions());
+			Cells.add(c);
 		}
 		return posarr;
 	}
@@ -66,6 +67,9 @@ public abstract class TStructure {
 	public int getSize(){
 		return Cells.size();
 	}
+	
+	
+	public abstract boolean isFull();
 	
 	
 }

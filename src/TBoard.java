@@ -63,17 +63,13 @@ public class TBoard {
 		    level.remove();
 		}
 	
+		
     }
 
     public int getLimit(int w, int h) {
 	//TODO what to do with the outofboundsexception?
 	    int n = All[w][h].getLimit();
 	return n;
-    }
-
-    
-	
-	return false;
     }
     
 	// TODO move to TWall
@@ -101,9 +97,5 @@ public class TBoard {
 	    	}
 	    }
     }
-    
-
-
-
     
 }

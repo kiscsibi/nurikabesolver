@@ -1,3 +1,8 @@
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 
 public class TWall extends TStructure {
     
@@ -28,7 +33,7 @@ public class TWall extends TStructure {
 	}
 	
 	public boolean isReachable(TCell goal, Collection Col, int togo) {
-		Set<TCell> pos = new Set<TCell>();
+		Set<TCell> pos = new HashSet<TCell>();
 		TCell c;
 		
 		if(Col.contains(goal.Position))
@@ -36,8 +41,8 @@ public class TWall extends TStructure {
 		if(togo == 0 )
 			return false;
 		
-		
-		for(i = 0; i < Col.size(); i++){
+		for(Iterator i = Col.iterator(); i != null; i++) {
+				; i < Col.size(); i++){
 				c = Col.pop();
 				pos.addAll(c.getPosExtensions());
 		}
