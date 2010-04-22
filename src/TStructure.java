@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
-
+import java.util.Set;
 
 public abstract class TStructure {
 	
@@ -29,13 +29,23 @@ public abstract class TStructure {
 //		 }
 //		 return c;
 //	 }
-	    
+	  
+	public Set<TPos> getPosExtensions(TStructure struct) {
+		TCell c;
+		Set<TPos> posarr;
+		
+		for(int j = 0; j  < getSize(); j++) {
+			c = Cells.pop();
+			posarr.addAll(c.getPosExt());
+			Cells.push(c);
+		}
+		return posarr;
+	}
 	    
 	 public void addCell(TCell c) {
 	     c.Owner = this;
 	     colorize(c);
 	     Cells.add(c);
-	     Limit++;
 	 }
 	 
 	 abstract public void colorize(TCell c);
@@ -52,4 +62,10 @@ public abstract class TStructure {
 	public void setLimit(int limit) {
 	    Limit = limit;
 	}
+	
+	public int getSize(){
+		return Cells.size();
+	}
+	
+	
 }
