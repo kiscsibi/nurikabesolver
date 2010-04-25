@@ -1,5 +1,4 @@
 import java.util.HashSet;
-import java.util.Set;
 
 public class TCell {
 	int color;
@@ -58,6 +57,8 @@ public class TCell {
 		this.right = right;
 	}
 	
+	//TODO: cell.isWhite() & isBlack()	
+	
 	public int getColor() {
 		return color;
 	}	
@@ -72,6 +73,32 @@ public class TCell {
 	
 	public void setWhite() {
 		color = 1;
+		if(amountNBWhite() > 0) {
+			Set<TCells> whites = this.getNBWhite();
+			
+			TCell withlim = null;
+			
+			for(TCell c : whites) {
+				if(c.hasLimit()) {
+					this.setOwner(c.Owner)					
+				}
+				if(!c.hasLimit()) {
+					
+				}
+			}
+				
+			
+		}
+			
+	}
+	
+	public void setOwner(TStructure Owner) {
+		if(this.Owner == null) {
+			this.Owner = Owner;
+			for(TCell c : this.getNBWhites()) {
+				c.setOwner(Owner);
+			}
+		}
 	}
 	
 	public int getLimit() {
@@ -88,6 +115,8 @@ public class TCell {
 	}
 
 	// TODO Can be removed? Not useable for posExt() because neighbors can overlap
+	// make general version: amountNB(color)
+	
 	public int amountFreeNeighbours() {
 		int a = 0;
 		
@@ -103,20 +132,21 @@ public class TCell {
 		return a;
 	}
 	
+	// TODO check if posExt is valid position in Board (not outside of Board)
 	public Set<TPos> getPosExtensions() {
-		Set<TPos> pos = new HashSet<TPos>();
+		Set<TCell> pos = new Set<TCell>();
 		if(! up.hasColor())
-			pos.add(up.Position);
+			pos.add(up);
 		if(! down.hasColor())
-			pos.add(down.Position);
+			pos.add(down);
 		if(! left.hasColor())
-			pos.add(left.Position);
+			pos.add(left);
 		if (! right.hasColor())
-			pos.add(right.Position);
+			pos.add(right);
 		return pos;
 	}
 	
-	public boolean hasLimit(int w, int h) {
+	public boolean hasLimit() {
 		if (Owner != null) {
 		    return true;
 		}

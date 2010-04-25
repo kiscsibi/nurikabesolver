@@ -34,16 +34,14 @@ public class TWall extends TStructure {
 	
 	public boolean isReachable(TCell goal, Collection Col, int togo) {
 		Set<TCell> pos = new HashSet<TCell>();
-		TCell c;
 		
 		if(Col.contains(goal.Position))
 			return true;
 		if(togo == 0 )
 			return false;
 		
-		for(Iterator i = Col.iterator(); i != null; i++) {
-				; i < Col.size(); i++){
-				c = Col.pop();
+		for(i = 0; i < Col.size(); i++){
+		for(TCell c : Col) {
 				pos.addAll(c.getPosExtensions());
 		}
 		isReachable(goal, pos, togo-1);	

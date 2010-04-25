@@ -63,7 +63,6 @@ public class TBoard {
 		    level.remove();
 		}
 	
-		
     }
 
     public int getLimit(int w, int h) {
@@ -97,5 +96,4 @@ public class TBoard {
 	    	}
 	    }
     }
-    
 }

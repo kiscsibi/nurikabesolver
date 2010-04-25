@@ -68,8 +68,5 @@ public abstract class TStructure {
 		return Cells.size();
 	}
 	
-	
 	public abstract boolean isFull();
-	
-	
 }

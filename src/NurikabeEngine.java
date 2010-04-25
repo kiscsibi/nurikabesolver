@@ -53,6 +53,52 @@ public class NurikabeEngine {
     	
     }
     
+<<<<<<< local
+    public void solve() {
+	
+    }
+=======
+>>>>>>> other
     
+<<<<<<< local
+    public void hFull(TCell cell){
+    	if (cell.Owner.isFull()){
+    		Set<TCell> neighbors = cell.Owner.greyNBs();
+    		for (TCell c : neighbors){
+    			c.setBlack();
+    		}   		
+    	}
+    	
+    }
+=======
+>>>>>>> other
     
+<<<<<<< local
+    public void hFloorSplit(TCell cell){
+    	Set<TCell> exts = cell.getPosExtensions();
+    	for (TCell c : exts){
+    		if(c.amountWall() >= 2){
+    			c.setBlack();
+    		}
+    	}
+    }
+    
+    public void hOneExt(TCell cell){
+    	if(cell.amountGrey() == 1){
+    		if(cell.isWhite() && ! cell.Owner.isFull){
+    			Set<TCell> exts = cell.getPosExtensions();
+    			exts.pop().setWhite();
+    		}
+    		else if(cell.isBlack()){
+    			Set<TCell> exts = cell.getPosExtensions();
+    			exts.pop().setBlack();
+    		}
+    	}
+    	
+    	if(cell.)
+    		
+    }
+    
+=======
+>>>>>>> other
 }
