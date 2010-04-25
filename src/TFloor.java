@@ -10,4 +10,8 @@ public class TFloor extends TStructure {
     	c.setBlack();
     }
 
+	@Override
+	public boolean isFull() {
+		return false;
+	}
 }

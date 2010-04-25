@@ -70,11 +70,6 @@ public class TBoard {
 	    int n = All[w][h].getLimit();
 	return n;
     }
-
-    
-	
-	return false;
-    }
     
 	// TODO move to TWall
     public void checkReachable() {
@@ -101,9 +96,4 @@ public class TBoard {
 	    	}
 	    }
     }
-    
-
-
-
-    
 }

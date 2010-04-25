@@ -1,4 +1,4 @@
-import java.util.Set;
+import java.util.HashSet;
 
 public class TCell {
 	int color;
@@ -116,6 +116,7 @@ public class TCell {
 
 	// TODO Can be removed? Not useable for posExt() because neighbors can overlap
 	// make general version: amountNB(color)
+	
 	public int amountFreeNeighbours() {
 		int a = 0;
 		
@@ -132,7 +133,7 @@ public class TCell {
 	}
 	
 	// TODO check if posExt is valid position in Board (not outside of Board)
-	public Set<TCell> getPosExtensions() {
+	public Set<TPos> getPosExtensions() {
 		Set<TCell> pos = new Set<TCell>();
 		if(! up.hasColor())
 			pos.add(up);
@@ -151,4 +152,22 @@ public class TCell {
 		}
 		else return false;
 	} 
+	
+	public boolean isBlack() {
+		if(color == 0)
+			return true;
+		else return false;
+	}
+	
+	public boolean isWhite() {
+		if(color == 1)
+			return true;
+		else return false;
+	}
+	
+	public boolean isGray() {
+		if(color == 2)
+			return true;
+		else return false;
+	}
 }

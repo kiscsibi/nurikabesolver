@@ -1,11 +1,16 @@
 import java.io.File;
+import java.util.LinkedList;
 
 public class NurikabeEngine {
 
 	TBoard Board;
 	TFileHandler FileHandler;
+    ProcessList = new LinkedList<TCell>();
+    private Queue<TCell> Actual;
+
     
-    public NurikabeEngine(int height, int width) {
+    
+	public NurikabeEngine(int height, int width) {
     	super();
     	Board = new TBoard(height, width);
     	FileHandler = new TFileHandler();
@@ -38,14 +43,24 @@ public class NurikabeEngine {
 	return Board.getLimit(w,h);
     }
     
-    public boolean hasLimit(int w, int h) {
-	return Board.hasLimit(w,h);
+/*    public boolean hasLimit(int w, int h) {
+    	return Board.hasLimit(w,h);
+    }
+*/  
+    
+    
+    public void solve() {
+    	
     }
     
+<<<<<<< local
     public void solve() {
 	
     }
+=======
+>>>>>>> other
     
+<<<<<<< local
     public void hFull(TCell cell){
     	if (cell.Owner.isFull()){
     		Set<TCell> neighbors = cell.Owner.greyNBs();
@@ -55,7 +70,10 @@ public class NurikabeEngine {
     	}
     	
     }
+=======
+>>>>>>> other
     
+<<<<<<< local
     public void hFloorSplit(TCell cell){
     	Set<TCell> exts = cell.getPosExtensions();
     	for (TCell c : exts){
@@ -81,4 +99,6 @@ public class NurikabeEngine {
     		
     }
     
+=======
+>>>>>>> other
 }
