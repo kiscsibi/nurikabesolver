@@ -40,8 +40,9 @@ public class TWall extends TStructure {
 			return false;
 		
 		for(TCell c : Col) {
-				pos.addAll( (Collection<TCell>) c.getPosExtensions());
+				pos.addAll( (Collection<TCell>) c.getNBGreys());
 		}
+		
 		return isReachable(goal, pos, togo-1);	
 	}
 } 

@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.Set;
 
 public class TCell {
 	int color;
@@ -57,8 +58,6 @@ public class TCell {
 		this.right = right;
 	}
 	
-	//TODO: cell.isWhite() & isBlack()	
-	
 	public int getColor() {
 		return color;
 	}	
@@ -73,17 +72,14 @@ public class TCell {
 	
 	public void setWhite() {
 		color = 1;
-		if(amountNBWhite() > 0) {
-			Set<TCells> whites = this.getNBWhite();
-			
+		Set<TCell> whites = this.getNBWhites();
+		
+		if(whites != null) {
 			TCell withlim = null;
 			
 			for(TCell c : whites) {
 				if(c.hasLimit()) {
-					this.setOwner(c.Owner)					
-				}
-				if(!c.hasLimit()) {
-					
+					this.setOwner(c.Owner);				
 				}
 			}
 				
@@ -101,77 +97,61 @@ public class TCell {
 		}
 	}
 	
+	private Set<TCell> getNBColor(int color) {
+		Set<TCell> ext = new HashSet<TCell>();
+		if( up.getColor() == color )
+			ext.add(up);
+		if( down.getColor() == color )
+			ext.add(down);
+		if( left.getColor() == color )
+			ext.add(left);
+		if ( right.getColor() == color )
+			ext.add(right);
+		return ext;	
+	}
+	
+	public Set<TCell> getNBWhites() {
+		return getNBColor(1);
+	}
+	public Set<TCell> getNBGreys() {
+		return getNBColor(2);
+	}
+	public Set<TCell> getNBBlacks() {
+		return getNBColor(0);
+	}
+
+	
+	
 	public int getLimit() {
 	    if(Owner == null)
 		return -1;
 	    else return Owner.getLimit();
 	    
-	}
-	
-	public boolean hasColor() {
-		if (color != 2)
-		return true;
-		else return false;
-	}
+	}	
 
 	// TODO Can be removed? Not useable for posExt() because neighbors can overlap
 	// make general version: amountNB(color)
 	
-	public int amountFreeNeighbours() {
-		int a = 0;
 		
-		if(up.hasColor())
-			a++;
-		if(down.hasColor())
-			a++;
-		if(left.hasColor())
-			a++;
-		if(right.hasColor())
-			a++;
-		
-		return a;
-	}
-	
-<<<<<<< local
-	public Set<TCell> getPosExtensions() {
-		Set<TCell> ext = new HashSet<TCell>();
-=======
-	// TODO check if posExt is valid position in Board (not outside of Board)
-	public Set<TPos> getPosExtensions() {
-		Set<TCell> pos = new Set<TCell>();
-		if(! up.hasColor())
-			ext.add(up);
-		if(! down.hasColor())
-			ext.add(down);
-		if(! left.hasColor())
-			ext.add(left);
-		if (! right.hasColor())
-			ext.add(right);
-		return ext;
-	}
-	
-	public boolean hasLimit(int w, int h) {
-		if (Owner != null && Owner.getLimit() != -1) {
+	public boolean hasLimit() {
+		if (Owner.getLimit() != -1) {
 		    return true;
 		}
 		else return false;
 	} 
-	
+	public boolean isColor(int c) {
+		if (c == color) {
+			return true;
+		}
+		else return false;
+	}
 	public boolean isBlack() {
-		if(color == 0)
-			return true;
-		else return false;
-	}
-	
+		return isColor(0);	
+	}	
 	public boolean isWhite() {
-		if(color == 1)
-			return true;
-		else return false;
+		return isColor(1);
 	}
-	
 	public boolean isGray() {
-		if(color == 2)
-			return true;
-		else return false;
+		return isColor(2);
 	}
 }
