@@ -66,9 +66,12 @@ public class TBoard {
     }
 
     public int getLimit(int w, int h) {
-	//TODO what to do with the outofboundsexception?
-	    int n = All[w][h].getLimit();
-	return n;
+	    try {
+		    int n = All[w][h].getLimit();
+		    return n;
+	    } catch(Exception e) {
+	    	return -1;
+	    }
     }
     
 	// TODO move to TWall

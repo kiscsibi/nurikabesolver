@@ -1,19 +1,19 @@
 import java.io.File;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class NurikabeEngine {
 
 	TBoard Board;
 	TFileHandler FileHandler;
-    ProcessList = new LinkedList<TCell>();
-    private Queue<TCell> Actual;
-
+    Queue<TCell> ProcessList;
     
     
 	public NurikabeEngine(int height, int width) {
     	super();
     	Board = new TBoard(height, width);
     	FileHandler = new TFileHandler();
+    	ProcessList = new LinkedList<TCell>();
     }
 
     public int getHeight() {
@@ -47,7 +47,6 @@ public class NurikabeEngine {
     	return Board.hasLimit(w,h);
     }
 */  
-    
     
     public void solve() {
     	

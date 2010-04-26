@@ -132,22 +132,26 @@ public class TCell {
 		return a;
 	}
 	
+<<<<<<< local
+	public Set<TCell> getPosExtensions() {
+		Set<TCell> ext = new HashSet<TCell>();
+=======
 	// TODO check if posExt is valid position in Board (not outside of Board)
 	public Set<TPos> getPosExtensions() {
 		Set<TCell> pos = new Set<TCell>();
 		if(! up.hasColor())
-			pos.add(up);
+			ext.add(up);
 		if(! down.hasColor())
-			pos.add(down);
+			ext.add(down);
 		if(! left.hasColor())
-			pos.add(left);
+			ext.add(left);
 		if (! right.hasColor())
-			pos.add(right);
-		return pos;
+			ext.add(right);
+		return ext;
 	}
 	
-	public boolean hasLimit() {
-		if (Owner != null) {
+	public boolean hasLimit(int w, int h) {
+		if (Owner != null && Owner.getLimit() != -1) {
 		    return true;
 		}
 		else return false;
