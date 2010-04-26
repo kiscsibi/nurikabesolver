@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 public class NurikabeEngine {
 
@@ -40,64 +41,66 @@ public class NurikabeEngine {
     }    
 
     public int getLimit(int w, int h) {
-	return Board.getLimit(w,h);
+    	return Board.getLimit(w,h);
     }
     
 /*    public boolean hasLimit(int w, int h) {
     	return Board.hasLimit(w,h);
     }
 */  
-    
-    public void solve() {
-    	
-    }
-    
-<<<<<<< local
-    public void solve() {
-	
-    }
-=======
->>>>>>> other
-    
-<<<<<<< local
-    public void hFull(TCell cell){
-    	if (cell.Owner.isFull()){
-    		Set<TCell> neighbors = cell.Owner.greyNBs();
-    		for (TCell c : neighbors){
+
+    /**
+     * colors all the greys around the borders of a full wall
+     */
+    public void hFull(TCell cell) {
+    	if (cell.Owner.isFull()) {
+    		
+    		Set<TCell> neighbors = cell.Owner.getNBGreys();
+    		for (TCell c : neighbors) {
     			c.setBlack();
     		}   		
     	}
     	
     }
-=======
->>>>>>> other
-    
-<<<<<<< local
+
+    /**
+     * colors black if two different whites can reach the same grey
+     * @param cell the cell to check
+     */
     public void hFloorSplit(TCell cell){
-    	Set<TCell> exts = cell.getPosExtensions();
-    	for (TCell c : exts){
-    		if(c.amountWall() >= 2){
-    			c.setBlack();
-    		}
+    	Set<TCell> whites = cell.getNBWhites();
+    	if(whites.size() >= 2) {
+    		for(TCell c1 : whites) {
+    			for(TCell c2 : whites) {
+    				if(!c1.equals(c2) && !c1.Owner.equals(c2.Owner)) {
+    					cell.setBlack();
+    				}
+    			}
+       		}
     	}
     }
     
-    public void hOneExt(TCell cell){
-    	if(cell.amountGrey() == 1){
-    		if(cell.isWhite() && ! cell.Owner.isFull){
-    			Set<TCell> exts = cell.getPosExtensions();
-    			exts.pop().setWhite();
+    /**
+     * colors the next one if there is just one way
+     * @param cell
+     */
+    public void hOneExt(TCell cell) {
+    	Set<TCell> greys = cell.getNBGreys(); 
+    	if(greys.size() == 1) {
+    		if(cell.isWhite() && ! cell.Owner.isFull()){
+    			for(TCell g : greys) {
+    				g.setWhite();
+    			}
     		}
     		else if(cell.isBlack()){
-    			Set<TCell> exts = cell.getPosExtensions();
-    			exts.pop().setBlack();
+    			for(TCell g : greys) {
+    				g.setWhite();
+    			}
     		}
     	}
-    	
-    	if(cell.)
-    		
     }
     
-=======
->>>>>>> other
+	public void hLForm() {
+		
+	}
 }

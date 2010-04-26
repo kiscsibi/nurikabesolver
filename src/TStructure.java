@@ -12,15 +12,11 @@ public abstract class TStructure {
 	//TODO is it intelligent to first iterate though everything 
 	//and then iterate through the output once more?
 	//we could do this in 1 step
-
-    //	 int countPossibleExt() {
-//		 int c = 0;
-//		 for(int i = 0; i < Cells.length; i++) {
-//			 c += Cells[i].amountFreeNeighbours(); 
-//		 }
-//		 return c;
-//	 }
 	 
+    abstract public void colorize(TCell c);
+    abstract public boolean isFull();
+
+    
     public TStructure() {
     	Limit = -1;
     }
@@ -29,8 +25,7 @@ public abstract class TStructure {
 		Set<TCell> posarr = new HashSet<TCell>();
 		
 		for(TCell c : Cells) {
-			posarr.addAll((Collection<TCell>) c.getPosExtensions());
-			Cells.add(c);
+			posarr.addAll((Collection<TCell>) c.getNBGreys());
 		}
 		return posarr;
 	}
@@ -39,10 +34,8 @@ public abstract class TStructure {
 	     c.Owner = this;
 	     colorize(c);
 	     Cells.add(c);
-	 }
-	 
-	 abstract public void colorize(TCell c);
-	 
+	 }	 
+ 
 	 public TStructure(int limit) {
 	    Cells = new LinkedList<TCell>();
 	    Limit = limit;
@@ -60,5 +53,11 @@ public abstract class TStructure {
 		return Cells.size();
 	}
 	
-	public abstract boolean isFull();
+	public Set<TCell> getNBGreys() {
+		Set<TCell> greys = new HashSet<TCell>();
+		for(TCell c : Cells) {
+			greys.addAll((Collection<TCell>) c.getNBGreys());
+		}
+		return greys;
+	}
 }
