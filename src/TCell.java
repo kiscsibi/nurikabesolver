@@ -117,7 +117,7 @@ public class TCell {
 	}
 	
 	public boolean hasLimit(int w, int h) {
-		if (Owner != null) {
+		if (Owner != null && Owner.getLimit() != -1) {
 		    return true;
 		}
 		else return false;

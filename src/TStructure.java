@@ -30,7 +30,11 @@ public abstract class TStructure {
 //		 }
 //		 return c;
 //	 }
-	  
+	 
+    public TStructure() {
+    	Limit = -1;
+    }
+    
 	public Set<TPos> getPosExtensions(TStructure struct) {
 		TCell c;
 		Set<TPos> posarr = new HashSet<TPos>();
@@ -67,7 +71,6 @@ public abstract class TStructure {
 	public int getSize(){
 		return Cells.size();
 	}
-	
 	
 	public abstract boolean isFull();
 	
