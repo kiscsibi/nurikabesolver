@@ -103,17 +103,17 @@ public class TCell {
 		return a;
 	}
 	
-	public Set<TPos> getPosExtensions() {
-		Set<TPos> pos = new HashSet<TPos>();
+	public Set<TCell> getPosExtensions() {
+		Set<TCell> ext = new HashSet<TCell>();
 		if(! up.hasColor())
-			pos.add(up.Position);
+			ext.add(up);
 		if(! down.hasColor())
-			pos.add(down.Position);
+			ext.add(down);
 		if(! left.hasColor())
-			pos.add(left.Position);
+			ext.add(left);
 		if (! right.hasColor())
-			pos.add(right.Position);
-		return pos;
+			ext.add(right);
+		return ext;
 	}
 	
 	public boolean hasLimit(int w, int h) {
