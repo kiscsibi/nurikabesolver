@@ -1,6 +1,5 @@
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 
@@ -29,10 +28,10 @@ public class TWall extends TStructure {
 	}
 	
 	public boolean isReachable(TCell goal) {
-		isReachable(goal, Cells, stillToPlace());
+		return isReachable(goal, Cells, stillToPlace());
 	}
 	
-	public boolean isReachable(TCell goal, Collection Col, int togo) {
+	public boolean isReachable(TCell goal, Collection<TCell> Col, int togo) {
 		Set<TCell> pos = new HashSet<TCell>();
 		
 		if(Col.contains(goal.Position))
@@ -40,10 +39,9 @@ public class TWall extends TStructure {
 		if(togo == 0 )
 			return false;
 		
-		for(i = 0; i < Col.size(); i++){
 		for(TCell c : Col) {
-				pos.addAll(c.getPosExtensions());
+				pos.addAll( (Collection<TCell>) c.getPosExtensions());
 		}
-		isReachable(goal, pos, togo-1);	
+		return isReachable(goal, pos, togo-1);	
 	}
-}
+} 
