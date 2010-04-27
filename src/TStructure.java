@@ -25,7 +25,7 @@ public abstract class TStructure {
 		Set<TCell> posarr = new HashSet<TCell>();
 		
 		for(TCell c : Cells) {
-			posarr.addAll((Collection<TCell>) c.getNBGreys());
+			posarr.addAll((Collection<TCell>) c.getNBGrays());
 		}
 		return posarr;
 	}
@@ -53,10 +53,10 @@ public abstract class TStructure {
 		return Cells.size();
 	}
 	
-	public Set<TCell> getNBGreys() {
+	public Set<TCell> getNBGrays() {
 		Set<TCell> greys = new HashSet<TCell>();
 		for(TCell c : Cells) {
-			greys.addAll((Collection<TCell>) c.getNBGreys());
+			greys.addAll((Collection<TCell>) c.getNBGrays());
 		}
 		return greys;
 	}

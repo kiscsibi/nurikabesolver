@@ -14,7 +14,11 @@ public class TCell {
 	TCell left;
 	TCell right;
 	
-	
+	/**
+	 * Constructor
+	 * @param x x Position of Cell
+	 * @param y y Position of Cell
+	 */
 	public TCell(int x, int y) {
 		super();
 		Position = new TPos(x,y);
@@ -22,9 +26,14 @@ public class TCell {
 		down = null;
 		left = null;
 		right = null;
-		color = 2;
 		Owner = null;
+		setGray();
 	}
+	
+	
+	/**************************************
+	 * GETTERS AND SETTERS
+	 **************************************/
 	
 	public TCell getUp() {
 		return up;
@@ -65,38 +74,32 @@ public class TCell {
 	public void setColor(int color) {
 		this.color = color;
 	}
+
+	public void setOwner(TStructure Owner) {
+	    this.Owner = Owner;
+	}
+
+	
+	/********************************
+	 * extension functions
+	 ********************************/
 	
 	public void setBlack() {
 		color = 0;
-	}
-	
+	}	
 	public void setWhite() {
 		color = 1;
-		Set<TCell> whites = this.getNBWhites();
-		
-		if(whites != null) {
-			TCell withlim = null;
-			
-			for(TCell c : whites) {
-				if(c.hasLimit()) {
-					this.setOwner(c.Owner);				
-				}
-			}
-				
-			
-		}
-			
+	}
+	public void setGray() {
+	    color = 2;
 	}
 	
-	public void setOwner(TStructure Owner) {
-		if(this.Owner == null) {
-			this.Owner = Owner;
-			for(TCell c : this.getNBWhites()) {
-				c.setOwner(Owner);
-			}
-		}
-	}
-	
+
+	/**
+	 * get the neighbors with matching color
+	 * @param color the color to match
+	 * @return all neighbors of that color
+	 */
 	private Set<TCell> getNBColor(int color) {
 		Set<TCell> ext = new HashSet<TCell>();
 		if( up.getColor() == color )
@@ -113,15 +116,13 @@ public class TCell {
 	public Set<TCell> getNBWhites() {
 		return getNBColor(1);
 	}
-	public Set<TCell> getNBGreys() {
+	public Set<TCell> getNBGrays() {
 		return getNBColor(2);
 	}
 	public Set<TCell> getNBBlacks() {
 		return getNBColor(0);
 	}
 
-	
-	
 	public int getLimit() {
 	    if(Owner == null)
 		return -1;
@@ -129,16 +130,22 @@ public class TCell {
 	    
 	}	
 
-	// TODO Can be removed? Not useable for posExt() because neighbors can overlap
-	// make general version: amountNB(color)
-	
-		
+	/**
+	 * returns if cells owner has a limit
+	 * @return boolean
+	 */
 	public boolean hasLimit() {
 		if (Owner.getLimit() != -1) {
 		    return true;
 		}
 		else return false;
 	} 
+	
+	/**
+	 * compares the color of the cell with color and returns if it is the same
+	 * @param c the color
+	 * @return boolean
+	 */
 	public boolean isColor(int c) {
 		if (c == color) {
 			return true;
@@ -154,4 +161,5 @@ public class TCell {
 	public boolean isGray() {
 		return isColor(2);
 	}
+
 }
