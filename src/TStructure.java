@@ -26,12 +26,20 @@ public abstract class TStructure {
 	Limit = -1;
     }
 
+    /**
+     * constructor
+     * @param cell The first cell of the Structure
+     */
     public TStructure(TCell cell) {
 	Cells = new LinkedList<TCell>();
 	colorize(cell);
 	Cells.add(cell);
     }
 
+    /**
+     * constructor with limit
+     * @param limit the limit of the structure
+     */
     public TStructure(int limit) {
 	Cells = new LinkedList<TCell>();
 	Limit = limit;
@@ -49,25 +57,45 @@ public abstract class TStructure {
 	return grays;
     }
     
-    public void addCell(TCell c) {
-	c.Owner = this;
-	colorize(c);
-	Cells.add(c);
+    /**
+     * adds cell to structure
+     * @param cell the cell to add
+     */
+    public void addCell(TCell cell) {
+	cell.Owner = this;
+	colorize(cell);
+	Cells.add(cell);
     }	 
 
+    /**
+     * return the limit of structure
+     * @return limit
+     */
     public int getLimit() {
 	return Limit;
     }
 
+    /**
+     * sets the limit of the structure
+     * @param limit The limit
+     */
     public void setLimit(int limit) {
 	Limit = limit;
     }
 
+    /**
+     * returns the size of the structure (how many cells belong to the structure atm)
+     * @return size The size
+     */
     public int getSize(){
 	return Cells.size();
     }
 
-    public void addAll(TStructure owner) {
-	Cells.addAll((Collection<TCell>) owner.Cells);
+    /**
+     * adds all cells from another structure
+     * @param struct The structure with the cells to add
+     */
+    public void addAll(TStructure struct) {
+	Cells.addAll((Collection<TCell>) struct.Cells);
     }
 }

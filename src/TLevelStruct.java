@@ -43,7 +43,7 @@ public class TLevelStruct {
 	return wi.peek().y;
     }
     
-    public int getSize() {
+    public int getLimit() {
 	return wi.peek().size;
     }
     
