@@ -36,6 +36,7 @@ import javax.swing.SwingUtilities;
 */
 public class Mainwindow extends javax.swing.JFrame {
 	private JButton jButtonClose;
+	private AbstractAction abstractActionStart;
 	private JFileChooser jFileChooser;
 	private AbstractAction abstractActionFileOpen;
 	private JMenuItem jMenuItemFile;
@@ -169,6 +170,7 @@ public class Mainwindow extends javax.swing.JFrame {
 			{
 			    jButtonStart = new JButton();
 			    jButtonStart.setText("Start");
+			    jButtonStart.setAction(getAbstractActionStart());
 			}
 			    thisLayout.setVerticalGroup(thisLayout.createSequentialGroup()
 			    	.addComponent(getPlayfield(), 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -340,5 +342,17 @@ public class Mainwindow extends javax.swing.JFrame {
 		jFileChooser = new JFileChooser();
 	    }
 	    return jFileChooser;
+	}
+	
+	private AbstractAction getAbstractActionStart() {
+	    if(abstractActionStart == null) {
+		abstractActionStart = new AbstractAction("Start", null) {
+		    public void actionPerformed(ActionEvent evt) {
+			Engine.solve();
+			getPlayfield().repaint();
+		    }
+		};
+	    }
+	    return abstractActionStart;
 	}
 }

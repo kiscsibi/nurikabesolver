@@ -32,7 +32,9 @@ public abstract class TStructure {
      */
     public TStructure(TCell cell) {
 	Cells = new LinkedList<TCell>();
+	Limit =  -1;
 	colorize(cell);
+	cell.Owner = this;
 	Cells.add(cell);
     }
 

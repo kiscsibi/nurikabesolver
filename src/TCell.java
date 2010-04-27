@@ -176,14 +176,22 @@ public class TCell {
      */
     private Set<TCell> getNBColor(int color) {
 	Set<TCell> ext = new HashSet<TCell>();
-	if( up.getColor() == color )
-	    ext.add(up);
-	if( down.getColor() == color )
-	    ext.add(down);
-	if( left.getColor() == color )
-	    ext.add(left);
-	if ( right.getColor() == color )
-	    ext.add(right);
+	if(up != null) {
+	    if( up.getColor() == color )
+		ext.add(up);
+	}
+	if(down != null) {
+	    if( down.getColor() == color )
+		ext.add(down);
+	}
+	if(left != null) {
+	    if( left.getColor() == color )
+		ext.add(left);
+	}
+	if(right != null) {
+	    if ( right.getColor() == color )
+		ext.add(right);
+	}
 	return ext;	
     }
 

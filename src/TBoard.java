@@ -34,6 +34,11 @@ public class TBoard {
 	for(int i = 0; i < this.height; i++) {
 	    for (int j = 0; j < this.width; j++) {
 		All[i][j] = new TCell(i, j);
+	    }
+	}		
+	for(int i = 0; i < this.height; i++) {
+	    for (int j = 0; j < this.width; j++) {
+
 		if(i > 0)
 		    All[i][j].setUp(All[i-1][j]);
 		if(i < this.height - 1 )
@@ -134,7 +139,14 @@ public class TBoard {
 	    getWalls().add(new TWall(All[level.getX()-1][level.getY()-1], level.getLimit()));
 	    level.remove();
 	}
-	
+
+	for(TCell[] row : All ) {
+	    for(TCell c : row) {
+		if(!c.hasLimit()) {
+		    Grays.add(c);
+		}
+	    }
+	}
 
     }
 
@@ -169,10 +181,10 @@ public class TBoard {
      * @param cell The cell to color
      */
     public void setBlack(TCell cell) {
-	Set<TCell> blacks = cell.getNBWhites();
+	Set<TCell> blacks = cell.getNBBlacks();
 	if(!blacks.isEmpty()) {
 	    for(TCell b : blacks) {
-		if(cell.Owner != null) {
+		if(cell.Owner == null) {
 		    b.Owner.addCell(cell);				
 		}
 		else {
@@ -182,7 +194,6 @@ public class TBoard {
 		    }
 		}
 	    }
-	    cell.setBlack();
 	}
 	else {
 	    Floors.add(new TFloor(cell));
