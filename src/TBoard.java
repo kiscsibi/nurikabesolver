@@ -114,23 +114,27 @@ public class TBoard {
 	    }
     }
     
-    public void setWhite(TCell c) {
-	Set<TCell> whites = c.getNBWhites();
+    public void setWhite(TCell cell) {
+	Set<TCell> whites = cell.getNBWhites();
 	if(!whites.isEmpty()) {
 	    
 		for(TCell w : whites) {
 			if(w.hasLimit()) {
-				w.Owner.addCell(c);				
+				w.Owner.addCell(cell);				
 			}
 		}
 		//if an owner was found, check for no owners around
-		if(c.Owner != null) {
+		if(cell.Owner != null) {
 		    for(TCell w : whites) {
 			if(!w.hasLimit()) {
-			    c.Owner.addCell(w);
+			    cell.Owner.addCell(w);
 			}
 		    }
 		}			
 	}
+    }
+    
+    public void setBlack(TCell cell) {
+	cell.setBlack();
     }
 }

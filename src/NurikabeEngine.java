@@ -72,8 +72,8 @@ public class NurikabeEngine {
       * @param y    the y position of the cell
       * @return     limit of the cell
       */
-    public int getLimit(int w, int h) {
-    	return Board.getLimit(w,h);
+    public int getLimit(int x, int y) {
+    	return Board.getLimit(x,y);
     }
         
     
@@ -83,20 +83,23 @@ public class NurikabeEngine {
     
     /**
      * colors all the grays around the borders of a full wall
+     * @param cell a white cell
      */
     public void hFull(TCell cell) {
-    	if (cell.Owner.isFull()) {
-    		Set<TCell> neighbors = cell.Owner.getNBGrays();
-    		for (TCell c : neighbors) {
+	if(cell.hasLimit()) {
+    		if (cell.Owner.isFull()) {
+    		    Set<TCell> neighbors = cell.Owner.getNBGrays();
+    		    for (TCell c : neighbors) {
     			c.setBlack();
-    		}   		
-    	}
+    		    }   		
+    		}
+	}
     	
     }
 
     /**
-     * colors black if two different whites can reach the same grey
-     * @param cell the cell to check
+     * colors cell black if it has two white neighbors from different walls
+     * @param cell a gray cell
      */
     public void hFloorSplit(TCell cell){
     	Set<TCell> whites = cell.getNBWhites();
@@ -104,7 +107,7 @@ public class NurikabeEngine {
     		for(TCell c1 : whites) {
     			for(TCell c2 : whites) {
     				if(!c1.equals(c2) && !c1.Owner.equals(c2.Owner)) {
-    					cell.setBlack();
+    					Board.setBlack(cell);
     				}
     			}
        		}
@@ -112,28 +115,26 @@ public class NurikabeEngine {
     }
     
     /**
-     * colors the next one if there is just one way
-     * @param cell
+     * colors the only possible extension of Owner to the color of cell
+     * @param cell a colored cell
      */
     public void hOneExt(TCell cell) {
-    	Set<TCell> greys = cell.getNBGrays(); 
-    	if(greys.size() == 1) {
+    	Set<TCell> grays = cell.Owner.getNBGrays(); 
+    	if(grays.size() == 1) {
+    	    for(TCell g : grays) {
     		if(cell.isWhite() && ! cell.Owner.isFull()){
-    			for(TCell g : greys) {
-    				g.setWhite();
-    			}
+    		    Board.setWhite(g);
     		}
     		else if(cell.isBlack()){
-    			for(TCell g : greys) {
-    				g.setWhite();
-    			}
+    		    Board.setBlack(g);
     		}
+    	    }
     	}
     }
     
     /**
-     * Colors a Grey cell black if it is the gray one in an L form
-     * @param cell
+     * Colors a Gray cell black if it is the gray one in an L form
+     * @param cell a grey cell
      */
     public void hLForm(TCell cell) {
 		
@@ -141,17 +142,20 @@ public class NurikabeEngine {
 	if(!cell.isGray())
 	    return;
 	try {
-	if (    (cell.up.isBlack() && cell.left.isBlack() && cell.up.left.isBlack()) || 
-		(cell.up.isBlack() && cell.right.isBlack() && cell.up.right.isBlack()) || 
-		(cell.down.isBlack() && cell.left.isBlack() && cell.down.left.isBlack()) ||
-		(cell.down.isBlack() && cell.right.isBlack() && cell.down.right.isBlack()) )   {
-	    cell.setWhite();
-	}
+        	if (    (cell.up.isBlack() && cell.left.isBlack() && cell.up.left.isBlack()) || 
+        		(cell.up.isBlack() && cell.right.isBlack() && cell.up.right.isBlack()) || 
+        		(cell.down.isBlack() && cell.left.isBlack() && cell.down.left.isBlack()) ||
+        		(cell.down.isBlack() && cell.right.isBlack() && cell.down.right.isBlack()) )   {
+        	    Board.setWhite(cell);
+        	}
 	} catch(Exception e) {
-	    
+	    //BorderException do nothing, since no L form is found
 	}
     }
     
+    /**
+     * colors all not reachable gray cells black
+     */
     public void hNotReachable() {
 	
 	Set<TCell> reachables = new HashSet<TCell>();
@@ -159,9 +163,9 @@ public class NurikabeEngine {
 	for(TWall w : Board.getWalls()) {
 	    reachables.addAll(w.getReachables());
 	}
-	for(TCell c : Board.getGrays()) {
-	    if(!reachables.contains(c)) {
-		c.setBlack();
+	for(TCell g : Board.getGrays()) {
+	    if(!reachables.contains(g)) {
+		Board.setBlack(g);
 	    }
 	}
     }
