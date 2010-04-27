@@ -1,14 +1,25 @@
 
 public class TFloor extends TStructure {
 
+    /**
+     * constuctor
+     */
     public TFloor() {
 	super(-1);
     }
 
+    /**
+     * constructor
+     * @param cell The first cell of Structure
+     */
     public TFloor(TCell cell) {
 	super(cell);
     }
 
+    /***************************
+     * OVERRIDES
+     ***************************/
+    
     @Override
     public void colorize(TCell c) {
 	c.setBlack();

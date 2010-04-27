@@ -6,8 +6,17 @@ import java.util.Set;
 
 public class NurikabeEngine {
 
+    /**
+     * The Board with the cells
+     */
     TBoard Board;
+    /**
+     * File handler to load level files
+     */
     TFileHandler FileHandler;
+    /**
+     * The list of Cells still to check
+     */
     Queue<TCell> ProcessList;
     
     

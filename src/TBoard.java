@@ -27,7 +27,7 @@ public class TBoard {
     }
 
     /**
-     * does setup on the board
+     * sets up the board
      */
     public void init() {
 	All = new TCell[this.height][this.width];
@@ -53,40 +53,77 @@ public class TBoard {
      * setter and getter
      *****************************/
 
+    /**
+     * returns height of the board
+     * @return height the height of the board
+     */
     public int getHeight() {
 	return height;
     }
 
+    /**
+     * returns width of the board
+     * @return width the width of the board 
+     */
     public int getWidth() {
 	return width;
     }
 
+    /**
+     * sets the Walls
+     * @param walls - Queue of walls to add
+     */
     public void setWalls(Queue<TWall> walls) {
 	Walls = walls;
     }
 
+    /**
+     * return Queue of walls
+     * @return Walls Queue of walls
+     */
     public Queue<TWall> getWalls() {
 	return Walls;
     }
 
+    /**
+     * returns Queue with all Grays
+     * @return Grays A Queue with Grays
+     */
     public Queue<TCell> getGrays() {
 	return Grays;
     }
 
+    /**
+     * returns Color of a cell in x,y position
+     * @param x x of the cell
+     * @param y y of the cell
+     * @return Color of the cell
+     */
     public int getColor(int x,int y) {
 	return All[x][y].getColor();
     }
 
-    public int getLimit(int w, int h) {
+    /**
+     * returns limit of a cell in x,y position
+     * -1 if there is no Limit or cell has no Owner
+     * @param x the x position of the cell
+     * @param y the y position of the cell
+     * @return limit of the cell
+     */
+    public int getLimit(int x, int y) {
 	try {
-	    int n = All[w][h].getLimit();
+	    int n = All[x][y].getLimit();
 	    return n;
 	} catch(Exception e) {
 	    return -1;
 	}
     }
 
-
+    /**
+     * Loads a Level from TLevelStruct 
+     * @param level TLevelStruct of the level to load
+     * @throws Exception if there is an error with loading
+     */
     public void loadLevel(TLevelStruct level) throws Exception {
 	//TODO check exception for array and remove
 	width = level.width;
@@ -94,26 +131,18 @@ public class TBoard {
 	init();
 
 	while(!level.isEmpty()) {
-	    getWalls().add(new TWall(All[level.getX()-1][level.getY()-1], level.getSize()));
+	    getWalls().add(new TWall(All[level.getX()-1][level.getY()-1], level.getLimit()));
 	    level.remove();
 	}
+	
 
     }
 
-
-
-
-    public void checkFullWalls() {
-	int walls = getWalls().size();
-
-	for(int i = 0; i < walls; i++) {
-	    TWall w = getWalls().poll();
-	    if(w.isFull()) {
-
-	    }
-	}
-    }
-
+    /**
+     * Sets a cell to white and adds it to wall if possible.
+     * Also checks for surrounding wall pieces with no Owner yet and add calls this function on them
+     * @param cell The cell to color
+     */
     public void setWhite(TCell cell) {
 	Set<TCell> whites = cell.getNBWhites();
 	if(!whites.isEmpty()) {
@@ -127,13 +156,18 @@ public class TBoard {
 	    if(cell.Owner != null) {
 		for(TCell w : whites) {
 		    if(!w.hasLimit()) {
-			cell.Owner.addCell(w);
+			setWhite(w);
 		    }
 		}
 	    }			
 	}
     }
 
+    /**
+     * Adds a cell to Floors. checks for floors with different owners around the cell in questions and combines them
+     * Otherwise create a new Floor with the cell
+     * @param cell The cell to color
+     */
     public void setBlack(TCell cell) {
 	Set<TCell> blacks = cell.getNBWhites();
 	if(!blacks.isEmpty()) {
