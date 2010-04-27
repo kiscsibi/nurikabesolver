@@ -44,7 +44,7 @@ public class TWall extends TStructure {
 	return Limit - Cells.size();
     }
 
-    
+
     /**
      * returns true if the Wall is full, false otherwise
      * @return boolean
@@ -75,21 +75,23 @@ public class TWall extends TStructure {
      */
     private Set<TCell> getReachables(Collection<TCell> ext, Set<TCell> hist, int togo) {
 
-	Set<TCell> next = new HashSet<TCell>();
 
-	if(togo == 0) {
+	hist.addAll(ext);
+
+	if(togo == 0 || ext.isEmpty()) {
 	    return hist;
 	}
-	else {
-	    for(TCell c : ext) {
-		for(TCell g : c.getNBGrays()) {
-		    if(!ext.contains(g)) {
-			ext.addAll( (Collection<TCell>) c.getNBGrays());
-		    }
+
+	Set<TCell> next = new HashSet<TCell>();
+
+	for(TCell c : ext) {
+	    for(TCell g : c.getNBGrays()) {
+		if(!hist.contains(g)) {
+		    next.addAll( (Collection<TCell>) c.getNBGrays());
 		}
 	    }
 	}
-	hist.addAll(ext);	    
+	    
 	return getReachables(next, hist, togo-1);
     }
 

@@ -131,7 +131,7 @@ public class NurikabeEngine {
     	Set<TCell> grays = cell.Owner.getNBGrays(); 
     	if(grays.size() == 1) {
     	    for(TCell g : grays) {
-    		if(cell.isWhite() && ! cell.Owner.isFull()){
+    		if(cell.isWhite() && ! cell.Owner.isFull()) {
     		    Board.setWhite(g);
     		}
     		else if(cell.isBlack()){
@@ -166,7 +166,6 @@ public class NurikabeEngine {
      * colors all not reachable gray cells black
      */
     public void hNotReachable() {
-	
 	Set<TCell> reachables = new HashSet<TCell>();
 	
 	for(TWall w : Board.getWalls()) {
@@ -177,5 +176,12 @@ public class NurikabeEngine {
 		Board.setBlack(g);
 	    }
 	}
+    }
+    
+    /**
+     * function that solves the game
+     */
+    public void solve() {
+	hNotReachable();
     }
 }
