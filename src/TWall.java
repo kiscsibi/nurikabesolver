@@ -38,7 +38,7 @@ public class TWall extends TStructure {
 	}
 
 	/**
-	 * returns the reachable grey cells of the wall
+ 	 * returns the reachable grey cells of the wall
 	 * @param ext the cells to extend
 	 * @param hist the already visited cells
 	 * @param togo the amount of steps left
@@ -71,5 +71,15 @@ public class TWall extends TStructure {
 	public Set<TCell> getReachables() {
 	    Set<TCell> hist = new HashSet<TCell>();
 	    return getReachables(Cells, hist, Limit-Cells.size());
+	}
+
+	@Override
+	public boolean isFloor() {
+	    return false;
+	}
+
+	@Override
+	public boolean isWall() {
+	    return true;
 	}
 } 
