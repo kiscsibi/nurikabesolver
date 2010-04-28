@@ -98,6 +98,9 @@ public abstract class TStructure {
      * @param struct The structure with the cells to add
      */
     public void addAll(TStructure struct) {
+	for(TCell c : struct.Cells) {
+	    c.Owner = this;
+	}
 	Cells.addAll((Collection<TCell>) struct.Cells);
     }
 }

@@ -1,6 +1,7 @@
 import java.util.HashSet;
 import java.util.Set;
 
+
 public class TCell {
     
     /**
@@ -274,5 +275,4 @@ public class TCell {
     public boolean isGray() {
 	return isColor(2);
     }
-
 }
