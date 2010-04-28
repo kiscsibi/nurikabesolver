@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
@@ -173,6 +174,9 @@ public class TBoard {
 		}
 	    }			
 	}
+	else {
+	    cell.setWhite();
+	}
     }
 
     /**
@@ -190,13 +194,27 @@ public class TBoard {
 		else {
 		    if(!cell.Owner.equals(b.Owner)) {
 			cell.Owner.addAll(b.Owner);
+			/*for(TCell c : b.Owner.Cells) {
+			    setBlack(c);
+			}*/
 			Floors.remove(b.Owner);
 		    }
 		}
 	    }
 	}
-	else {
+	else if(cell.Owner == null) {
 	    Floors.add(new TFloor(cell));
 	}
     }
+
+    public Queue<TCell> getAllCells() {
+	Queue<TCell> cells = new LinkedList<TCell>();
+	for(TCell[] row : All ) {
+	    for(TCell c : row) {
+		    cells.add(c);
+	    }
+	}
+	return cells;
+    }
+
 }
