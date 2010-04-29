@@ -346,13 +346,15 @@ public class Mainwindow extends javax.swing.JFrame {
 	
 	private AbstractAction getAbstractActionStart() {
 	    if(abstractActionStart == null) {
-		abstractActionStart = new AbstractAction("Start", null) {
-		    public void actionPerformed(ActionEvent evt) {
-			Engine.solve();
-			getPlayfield().repaint();
-		    }
-		};
+	    	abstractActionStart = new AbstractAction("Start", null) {
+		    	public void actionPerformed(ActionEvent evt) {
+		    		Engine.solve();
+		    		getPlayfield().repaint();
+		    	}
+			};
+			abstractActionStart.putValue(javax.swing.Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl shift pressed O"));
 	    }
+
 	    return abstractActionStart;
 	}
 }
