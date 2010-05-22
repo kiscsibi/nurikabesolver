@@ -1,4 +1,3 @@
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
@@ -167,16 +166,16 @@ public class TBoard {
 	    }
 	    //if an owner was found, check for no owners around
 	    if(cell.Owner != null) {
-		for(TCell w : whites) {
-		    if(!w.hasLimit()) {
-			setWhite(w);
-		    }
-		}
-	    }			
+	    	for(TCell w : whites) {
+	    		if(!w.hasLimit()) {
+	    			setWhite(w);
+	    		}
+	    	}
+	    }
 	}
-	else {
-	    cell.setWhite();
-	}
+	
+	cell.setWhite();
+	
     }
 
     /**
@@ -193,11 +192,12 @@ public class TBoard {
 		}
 		else {
 		    if(!cell.Owner.equals(b.Owner)) {
-			cell.Owner.addAll(b.Owner);
-			/*for(TCell c : b.Owner.Cells) {
-			    setBlack(c);
-			}*/
-			Floors.remove(b.Owner);
+		    	TStructure tmpown  = b.Owner;
+		    	cell.Owner.addAll(b.Owner);
+		    	/*for(TCell c : b.Owner.Cells) {
+			    	setBlack(c);
+				}*/
+		    	Floors.remove(tmpown);
 		    }
 		}
 	    }
