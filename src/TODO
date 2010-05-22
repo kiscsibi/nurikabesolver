@@ -4,5 +4,6 @@
 * program generator
 * program solver
 
-* error in setBlack(), some floors don't get connected
-
+* heuristicfix for reachables -> no grays next to other walls
+* heuristicfix if Wall.getNBGray > 1 AND for all except one (g_1.size + ... + g_n-1.size) < limit - size wall => gn = white  
+* heuristic unnumbered whites that only can come from one wall belong to that wall. Consequence is that direction get partly defined.

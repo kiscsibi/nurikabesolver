@@ -1,6 +1,5 @@
 import java.io.File;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -226,6 +225,25 @@ public class NurikabeEngine {
 		Board.getGrays().removeAll(delgrays);
 	}
 
+	
+	void hEndgame() {
+		int total = 0;
+		for(TWall w : Board.getWalls()) {
+			total += w.getLimit() - w.getSize();
+		}
+		if(total == Board.getGrays().size()) {
+			
+			Queue<TCell> delgrays = new LinkedList<TCell>();
+			
+			for(TCell c : Board.getGrays()) {
+				Board.setWhite(c);
+				delgrays.add(c);
+			}
+			Board.getGrays().removeAll(delgrays);
+		}
+	}
+	
+	
 	/**
 	 * function that solves the game
 	 */
@@ -233,8 +251,13 @@ public class NurikabeEngine {
 
 		TCell c = null;
 
-		while(!Board.getGrays().isEmpty()) {
+		int rep = 0;
 
+		
+		while(!Board.getGrays().isEmpty() && rep != Board.getGrays().size()) {
+
+			rep = Board.getGrays().size();
+			
 			ProcessList.addAll((Collection<TCell>) Board.getAllCells());
 			hNotReachable();
 
@@ -242,8 +265,10 @@ public class NurikabeEngine {
 
 				c = ProcessList.remove();
 
+				if(c.Position.x == 1 && c.Position.y == 1)
+					System.out.printf("blabla");
+				
 				if(c.isBlack()) {
-					Board.setBlack(c);
 					hOneExt(c);
 				}
 				else if(c.isWhite()) {
@@ -255,6 +280,8 @@ public class NurikabeEngine {
 					hFloorSplit(c);
 				}
 			}
+			
+			hEndgame();
 		}
 
 		return;
