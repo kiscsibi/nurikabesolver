@@ -91,7 +91,7 @@ public class Mainwindow extends javax.swing.JFrame {
 			    graphics.setColor(Color.black);
 			    int lim = Engine.getLimit(w, h);
 			    if( lim != -1 ) {
-				graphics.drawString(Integer.toString(Engine.getLimit(w,h)), (int)(w*width+0.25*width), (int)(h*height+0.25*height));
+				graphics.drawString(Integer.toString(Engine.getLimit(w,h)), (int)(w*width+0.25*width), (int)(h*height+0.85*height));
 			    }
 			}	
 		}
