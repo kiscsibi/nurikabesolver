@@ -64,12 +64,36 @@ public class TWall extends TStructure {
 
     /**
      * checks if a wall can reach a cell
+     * very bad implementation because it loops around, 
+     * we should fix this with a history
      * @param goal The cell to be reached
      * @return boolean
      */
     public boolean isReachable(TCell goal) {
-	Set<TCell> hist = new HashSet<TCell>();
-	return getReachables(Cells, hist, Limit-Cells.size()).contains(goal);
+	
+	for (TCell c : Cells) {
+	    if(isReachable(c, goal, stillToPlace()))
+		    return true;
+	}
+	
+	return false;
+    }
+    
+    private boolean isReachable(TCell c, TCell goal, int togo) {
+	if(togo < 0 || c == null)
+	    return false;
+	else if(c.equals(goal))
+	    return true;
+	else {
+	    if(isReachable(c.up, goal, togo-1) || 
+		    isReachable(c.down, goal, togo-1) ||
+		    isReachable(c.left, goal, togo-1) ||
+		    isReachable(c.right, goal, togo-1) ) {
+			return true;
+	    }
+	}
+	
+	return false;
     }
 
     /**
