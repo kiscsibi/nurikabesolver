@@ -91,6 +91,7 @@ public class NurikabeEngine {
 	/*********************************
 	 *   Heuristics
 	 *********************************/
+	 
 
 	/**
 	 * colors all the grays around the borders of a full wall
@@ -226,13 +227,9 @@ public class NurikabeEngine {
 	}
 
 	
-	void hEndgame() {
-		int total = 0;
-		for(TWall w : Board.getWalls()) {
-			total += w.getLimit() - w.getSize();
-		}
-		if(total == Board.getGrays().size()) {
-			
+	boolean hEndgame() {
+		
+		if(Board.TOTALWHITE - Board.countCurrentWhites() == Board.getGrays().size()) {
 			Queue<TCell> delgrays = new LinkedList<TCell>();
 			
 			for(TCell c : Board.getGrays()) {
@@ -240,19 +237,25 @@ public class NurikabeEngine {
 				delgrays.add(c);
 			}
 			Board.getGrays().removeAll(delgrays);
+			return true;
 		}
+		return false;
 	}
 	
+	
+	public void solve() {
+		hNotReachable();
+		
+	}
 	
 	/**
 	 * function that solves the game
 	 */
-	public void solve() {
+	public void solve1() {
 
 		TCell c = null;
 
 		int rep = 0;
-
 		
 		while(!Board.getGrays().isEmpty() && rep != Board.getGrays().size()) {
 
@@ -265,23 +268,22 @@ public class NurikabeEngine {
 
 				c = ProcessList.remove();
 
-				if(c.Position.x == 1 && c.Position.y == 1)
-					System.out.printf("blabla");
-				
-				if(c.isBlack()) {
-					hOneExt(c);
+				if (hEndgame()) {
+					break;
 				}
-				else if(c.isWhite()) {
+				
+				if(c.isWhite()) {
 					hOneExt(c);
 					hFull(c);
+				}
+				else if(c.isBlack()) {
+					hOneExt(c);
 				}
 				else {
 					hLForm(c);
 					hFloorSplit(c);
 				}
 			}
-			
-			hEndgame();
 		}
 
 		return;
