@@ -35,6 +35,10 @@ import javax.swing.SwingUtilities;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class Mainwindow extends javax.swing.JFrame {
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 	private JButton jButtonClose;
 	private AbstractAction abstractActionStart;
 	private JFileChooser jFileChooser;
