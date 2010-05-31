@@ -10,7 +10,7 @@ public class TPos {
 	}
 
 	public int cityblock(TPos p) {
-    	return Math.abs(x - p.x) + Math.abs(y + p.y);
+    	return Math.abs(x - p.x) + Math.abs(y - p.y);
     }
 
 }

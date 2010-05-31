@@ -273,6 +273,7 @@ public class NurikabeEngine {
 				}
 				
 				if(c.isWhite()) {
+				    	Board.mustBeConnected(c);
 					hOneExt(c);
 					hFull(c);
 				}

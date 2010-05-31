@@ -37,25 +37,26 @@ public class TBoard {
      * @param white
      * @return
      */
-    public TWall mustBeConnected(TCell white){
-        TWall connectWall = null;
-        for(TWall posWall : getWalls()){
-                if(posWall.isReachable(white)){
-                        if(connectWall == null){
-                                connectWall = posWall;
+    public void mustBeConnected(TCell c){
+        
+	if(c.hasLimit())
+            return;
+        
+	TWall connectWall = null;
+        for (TWall w : getWalls()){
+                if (w.isReachable(c)){
+                        if (connectWall == null){
+                                connectWall = w;
                         }
-                        else{
-                                return null;
-                        }
-                        
+                        else {
+                                return;
+                        }    
                 }
         }
-        return connectWall;
+        
+        if(connectWall != null)
+            connectWall.addCell(c);
     }
-
-
-
-    
     
     
     /**
