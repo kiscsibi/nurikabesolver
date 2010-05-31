@@ -8,6 +8,8 @@ public class TBoard {
     int height;
     int width;
 
+    int TOTALWHITE;
+    
     //TODO think about Errors from All OuOFBounds
     private TCell[][] All;
     private Queue<TWall> Walls;
@@ -23,9 +25,29 @@ public class TBoard {
 	super();
 	this.height = height;
 	this.width = width;
+	TOTALWHITE  = 0;
+	
 	init();
+	
     }
 
+    /**
+     * This function counts the current amount of whites to check if the endgame heuristics should be activated
+     * @return The amount of white cells in the current state
+     */
+    public int countCurrentWhites() {
+    	
+    	int t = 0;
+    	
+    	for(int i = 0; i < this.height; i++) {
+    		for (int j = 0; j < this.width; j++) {
+    			if(All[i][j].isWhite())
+    				t++; 
+    		}
+    	}
+    	return t;
+    }
+    
     /**
      * sets up the board
      */
@@ -148,6 +170,11 @@ public class TBoard {
 	    }
 	}
 
+	TOTALWHITE  = 0;
+	for(TWall w : Walls) {
+		TOTALWHITE += w.getLimit();
+	}
+	
     }
 
     /**
