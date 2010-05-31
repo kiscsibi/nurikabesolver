@@ -81,7 +81,6 @@ public class TWall extends TStructure {
      */
     private Set<TCell> getReachables(Collection<TCell> ext, Set<TCell> hist, int togo) {
 
-
 	hist.addAll(ext);
 
 	if(togo == 0 || ext.isEmpty()) {
@@ -92,7 +91,7 @@ public class TWall extends TStructure {
 
 	for(TCell c : ext) {
 	    for(TCell g : c.getNBGrays()) {
-		if(!hist.contains(g)) {
+	    if(!hist.contains(g)) {
 		    next.addAll( (Collection<TCell>) c.getNBGrays());
 		}
 	    }
@@ -100,14 +99,72 @@ public class TWall extends TStructure {
 	    
 	return getReachables(next, hist, togo-1);
     }
+    
 
+    /**
+     * 
+     * @return
+     */
+    public Set<TCell> fRwrapper() {
+    	Set<TCell> path;
+    	Set<TCell> Allpaths = new HashSet<TCell>();
+    	Set<TCell> hist = new HashSet<TCell>();
+    	
+    	
+    	
+    	for(TCell c: Cells) {
+    		hist.add(c);
+    		path = filterReachables(c, hist, Limit-Cells.size());
+    		if(path != null) {
+    			Allpaths.addAll(path);
+    		}
+    		hist.remove(c);
+    	}
+    	
+    	return Allpaths;
+    }
+    
+    /**
+     * 
+     * @param r
+     * @return
+     */
+    public Set<TCell> filterReachables(TCell c, Set<TCell> hist, int togo) {
+    	
+    	Set<TCell> allhist = new HashSet<TCell>();
+    	Set<TCell> tmphist;
+    	
+    	if(togo == 0) {
+    		if(hist.containsAll(Cells))
+    			return hist;
+    		else
+    			return null;
+    	}
+    	else {
+    		togo--;
+    		hist.add(c);
+    		
+    		for(TCell c2 : c.getNBGrays()) {
+    			tmphist = filterReachables(c2, hist, togo-1);
+    			if(tmphist != null)
+    				allhist.addAll(tmphist);
+    		}
+
+    		hist.remove(c);
+    		return allhist;
+    	}
+    }
+    
     /**
      * wrapper for getReachables(ext, hist, togo)
      * @return all grey cells that are reachable
      */
     public Set<TCell> getReachables() {
-	Set<TCell> hist = new HashSet<TCell>();
-	return getReachables(Cells, hist, Limit-Cells.size());
+//    	Set<TCell> s = fRwrapper();
+//    	return s;
+    	
+    	Set<TCell> hist = new HashSet<TCell>();
+    	return getReachables(Cells, hist, Limit-Cells.size());
     }
 
 } 

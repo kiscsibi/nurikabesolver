@@ -91,6 +91,7 @@ public class NurikabeEngine {
 	/*********************************
 	 *   Heuristics
 	 *********************************/
+	 
 
 	/**
 	 * colors all the grays around the borders of a full wall

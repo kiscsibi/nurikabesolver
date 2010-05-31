@@ -32,6 +32,33 @@ public class TBoard {
     }
 
     /**
+     * checks if a cell that is white but doesn't belong to a wall has just one wall that can reach the cell.
+     * If this is the case, then add the cell to the wall, else return false
+     * @param white
+     * @return
+     */
+    public TWall mustBeConnected(TCell white){
+        TWall connectWall = null;
+        for(TWall posWall : getWalls()){
+                if(posWall.isReachable(white)){
+                        if(connectWall == null){
+                                connectWall = posWall;
+                        }
+                        else{
+                                return null;
+                        }
+                        
+                }
+        }
+        return connectWall;
+    }
+
+
+
+    
+    
+    
+    /**
      * This function counts the current amount of whites to check if the endgame heuristics should be activated
      * @return The amount of white cells in the current state
      */
