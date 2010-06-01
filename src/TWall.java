@@ -183,7 +183,9 @@ public class TWall extends TStructure {
     public boolean conn(TCell c) {
 	Set<TCell> path = new HashSet<TCell>();
 	path.add(c);
-	return conn(c, path, Limit);
+	boolean ret = conn(c, path, Limit); 
+	path.remove(c);
+	return ret;
     }
     
     public boolean conn(TCell c, Set<TCell> path, int togo) {
