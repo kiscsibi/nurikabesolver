@@ -133,68 +133,31 @@ public class TWall extends TStructure {
 	return getReachables(next, hist, togo-1);
     }
     
-    public boolean connectsAll(TCell c) {
-	Set<TCell> path = new HashSet<TCell>();
-	path.addAll((Collection<TCell>) Cells);
-	path.add(c);
-	int steps = Limit - path.size();
-	
-	for(TCell g: c.getNBGrays()) {
-	    path.add(g);
-	    if(connect(path, steps))
-		return true;
-	    path.remove(g);
-	}
-	
-	return false;
-    }
-    
-    public boolean connect(Set<TCell> path, int togo) {
-	if(togo == 0) {
-	    for(TCell c1: path) {
-		for(TCell c2 : path) {
-		    if(c1.Position.cityblock(c2.Position) > Limit) {
-			return false;
-		    }
-		}
-	    }
-	    return true;
-	}
-	else {
-	    Set<TCell> tmppath = new HashSet<TCell>(path);
-	    for(TCell c1 : tmppath) {
-		boolean con = false;
-		for(TCell c2: c1.getNBGrays()) {
-		    path.add(c2);
-		    con = connect(path, togo-1);
-		    if(con == true) {
-			return true;
-		    }
-		    else {
-			path.remove(c2);
-		    }
-		}
-	    }
-	}
-	return false;
-    }
-    
-    
+    /**
+     * wrapper for conn/3
+     * @param c
+     * @return
+     */
     public boolean conn(TCell c) {
 	Set<TCell> path = new HashSet<TCell>();
-	path.add(c);
 	boolean ret = conn(c, path, Limit); 
-	path.remove(c);
 	return ret;
     }
     
+    /**
+     * checks if there is a path that connects all the ones from the wall with the one given.
+     * @param c
+     * @param path
+     * @param togo
+     * @return
+     */
     public boolean conn(TCell c, Set<TCell> path, int togo) {
-	//TODO or bigger than max cityblock
+	//TODO or togo bigger than max cityblock
 	if(togo < 0 || c == null)
 	    return false;
 	else if(c.isBlack())
 	    return false;
-	else if(togo == 0 && path.containsAll(Cells))
+	else if(path.containsAll(Cells))
 	    return true;
 	else {
 	    path.add(c);
