@@ -123,7 +123,7 @@ public class TWall extends TStructure {
 			}    
 		    }
 
-		    if (!otherWhite && conn(g)) {//&& connectsAll(g)) {
+		    if (!otherWhite){// && conn(g)) {//&& connectsAll(g)) {
 			next.add(g);
 		    }
 		}
