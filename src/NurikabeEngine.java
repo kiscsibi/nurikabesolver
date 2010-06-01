@@ -244,7 +244,33 @@ public class NurikabeEngine {
 	
 	
 	public void solve() {
+
+		TCell c = null;
+		
+		ProcessList.addAll((Collection<TCell>) Board.getAllCells());
 		hNotReachable();
+
+		while(!ProcessList.isEmpty()) {
+
+			c = ProcessList.remove();
+
+			if (hEndgame()) {
+				break;
+			}
+			
+			if(c.isWhite()) {
+			    	Board.mustBeConnected(c);
+				hOneExt(c);
+				hFull(c);
+			}
+			else if(c.isBlack()) {
+				hOneExt(c);
+			}
+			else {
+				hLForm(c);
+				hFloorSplit(c);
+			}
+		}
 		
 	}
 	
@@ -253,7 +279,7 @@ public class NurikabeEngine {
 	 */
 	public void solve1() {
 
-		TCell c = null;
+		
 
 		int rep = 0;
 		int cont  = 1;
@@ -261,30 +287,7 @@ public class NurikabeEngine {
 
 			rep = Board.getGrays().size();
 			
-			ProcessList.addAll((Collection<TCell>) Board.getAllCells());
-			hNotReachable();
-
-			while(!ProcessList.isEmpty()) {
-
-				c = ProcessList.remove();
-
-				if (hEndgame()) {
-					break;
-				}
-				
-				if(c.isWhite()) {
-				    	Board.mustBeConnected(c);
-					hOneExt(c);
-					hFull(c);
-				}
-				else if(c.isBlack()) {
-					hOneExt(c);
-				}
-				else {
-					hLForm(c);
-					hFloorSplit(c);
-				}
-			}
+			solve();
 			
 			if(rep == Board.getGrays().size())
 			    cont++;

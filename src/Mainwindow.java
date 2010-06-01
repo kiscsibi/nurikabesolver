@@ -352,7 +352,7 @@ public class Mainwindow extends javax.swing.JFrame {
 	    if(abstractActionStart == null) {
 	    	abstractActionStart = new AbstractAction("Start", null) {
 		    	public void actionPerformed(ActionEvent evt) {
-		    		Engine.solve1();
+		    		Engine.solve();
 		    		getPlayfield().repaint();
 		    	}
 			};

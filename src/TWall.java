@@ -133,6 +133,9 @@ public class TWall extends TStructure {
 	return getReachables(next, hist, togo-1);
     }
     
+    
+    
+    
     /**
      * wrapper for conn/3
      * @param c
@@ -153,25 +156,34 @@ public class TWall extends TStructure {
      */
     public boolean conn(TCell c, Set<TCell> path, int togo) {
 	//TODO or togo bigger than max cityblock
-	if(togo < 0 || c == null)
+	if(togo < 0 || c == null || path.contains(c))
 	    return false;
 	else if(c.isBlack())
 	    return false;
 	else if(path.containsAll(Cells))
 	    return true;
 	else {
+		
 	    path.add(c);
-	    if(conn(c.up, path, togo-1) || 
-		    conn(c.down, path, togo-1) ||
-		    conn(c.left, path, togo-1) ||
-		    conn(c.right, path, togo-1) ) {
-			return true;
+	    //TCell c2 = c;
+	    for(TCell c2 : path) {
+	    	if(conn(c2.up, path, togo-1) || 
+	    			conn(c2.down, path, togo-1) ||
+	    			conn(c2.left, path, togo-1) ||
+	    			conn(c2.right, path, togo-1) ) {
+	    		return true;
+	    	}
 	    }
 	    path.remove(c);
 	}
 	return false;
     }
     
+    
+    void conn2() {
+    	
+    	
+    }
     
     /**
      * wrapper for getReachables(ext, hist, togo)
