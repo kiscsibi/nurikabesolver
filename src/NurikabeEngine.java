@@ -256,8 +256,8 @@ public class NurikabeEngine {
 		TCell c = null;
 
 		int rep = 0;
-		
-		while(!Board.getGrays().isEmpty() && rep != Board.getGrays().size()) {
+		int cont  = 1;
+		while(!Board.getGrays().isEmpty() && cont < 3) { 
 
 			rep = Board.getGrays().size();
 			
@@ -285,6 +285,11 @@ public class NurikabeEngine {
 					hFloorSplit(c);
 				}
 			}
+			
+			if(rep == Board.getGrays().size())
+			    cont++;
+			else
+			    cont = 0;
 		}
 
 		return;

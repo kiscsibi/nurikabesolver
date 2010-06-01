@@ -28,7 +28,6 @@ public class TWall extends TStructure {
 	return true;
     }
 
-
     /**
      * constructor
      * @param cell the first cell of the wall
@@ -49,7 +48,6 @@ public class TWall extends TStructure {
     public int stillToPlace() {
 	return Limit - Cells.size();
     }
-
 
     /**
      * returns true if the Wall is full, false otherwise
@@ -117,7 +115,6 @@ public class TWall extends TStructure {
 	    for(TCell g : c.getNBGrays()) {
 		if(!hist.contains(g)) {
 		    boolean otherWhite = false;
-		    boolean cannotReach = false;
 		    //check if gray one is next to whites of other walls
 		    //if so, it is not reachable
 		    for(TCell w : c.getNBWhites() ) {
@@ -125,8 +122,8 @@ public class TWall extends TStructure {
 			    otherWhite = true;
 			}    
 		    }
-		    int tmplim  = Limit;
-		    if (!otherWhite && connectsAll(c)) {
+
+		    if (!otherWhite && conn(g)) {//&& connectsAll(g)) {
 			next.add(g);
 		    }
 		}
@@ -143,10 +140,13 @@ public class TWall extends TStructure {
 	int steps = Limit - path.size();
 	
 	for(TCell g: c.getNBGrays()) {
-	    connect(path, steps);
+	    path.add(g);
+	    if(connect(path, steps))
+		return true;
+	    path.remove(g);
 	}
 	
-	return true;
+	return false;
     }
     
     public boolean connect(Set<TCell> path, int togo) {
@@ -179,65 +179,35 @@ public class TWall extends TStructure {
 	return false;
     }
     
-    /**
-     * 
-     * @return
-     */
-    public Set<TCell> fRwrapper() {
-	Set<TCell> path;
-	Set<TCell> Allpaths = new HashSet<TCell>();
-	Set<TCell> hist = new HashSet<TCell>();
-
-
-
-	for(TCell c: Cells) {
-	    hist.add(c);
-	    path = filterReachables(c, hist, Limit-Cells.size());
-	    if(path != null) {
-		Allpaths.addAll(path);
-	    }
-	    hist.remove(c);
-	}
-
-	return Allpaths;
+    
+    public boolean conn(TCell c) {
+	Set<TCell> path = new HashSet<TCell>();
+	path.add(c);
+	return conn(c, path, Limit);
     }
-
-    /**
-     * 
-     * @param r
-     * @return
-     */
-    public Set<TCell> filterReachables(TCell c, Set<TCell> hist, int togo) {
-
-	Set<TCell> allhist = new HashSet<TCell>();
-	Set<TCell> tmphist;
-
-	if(togo == 0) {
-	    if(hist.containsAll(Cells))
-		return hist;
-	    else
-		return null;
-	}
+    
+    public boolean conn(TCell c, Set<TCell> path, int togo) {
+	//TODO or bigger than max cityblock
+	if(togo < 0 || c == null)
+	    return false;
+	else if(c.isBlack())
+	    return false;
+	else if(togo == 0 && path.containsAll(Cells))
+	    return true;
 	else {
-	    togo--;
-	    hist.add(c);
-
-	    for(TCell c2 : c.getNBGrays()) {
-		for(TCell c1 : Cells) {
-			break;
-		}
-
-		tmphist = filterReachables(c2, hist, togo-1);
-
-		if(tmphist != null)
-		    allhist.addAll(tmphist);
-
+	    path.add(c);
+	    if(conn(c.up, path, togo-1) || 
+		    conn(c.down, path, togo-1) ||
+		    conn(c.left, path, togo-1) ||
+		    conn(c.right, path, togo-1) ) {
+			return true;
 	    }
-	    hist.remove(c);
-	    return allhist;
+	    path.remove(c);
 	}
+	return false;
     }
-
+    
+    
     /**
      * wrapper for getReachables(ext, hist, togo)
      * @return all grey cells that are reachable
